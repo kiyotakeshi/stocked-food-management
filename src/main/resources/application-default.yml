@@ -1,0 +1,7 @@
+server:
+  port: 8888
+spring:
+  datasource:
+    url: jdbc:postgresql:postgres
+    username: postgres
+    password: postgres

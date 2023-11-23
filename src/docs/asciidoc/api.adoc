@@ -1,0 +1,10 @@
+[[top]]
+= Stocked Food Management API Guide
+
+[[resources_stocked_foods]]
+== StockedFoods(備蓄食)
+
+[[resources_greetings_list]]
+=== List stocked foods
+
+operation::get-all-stocked-foods[snippets='curl-request,response-fields,http-response']

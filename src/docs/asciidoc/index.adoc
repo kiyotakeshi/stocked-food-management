@@ -1,0 +1,4 @@
+= Stocked Food Management
+
+[horizontal]
+<<api.adoc#top,API Guide>> :: API Guide
