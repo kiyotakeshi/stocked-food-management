@@ -19,3 +19,9 @@ docker compose ps
 
 open target/generated-docs/index.html
 ```
+
+## format and validate
+
+```shell
+./mvnw spring-javaformat:apply validate
+```

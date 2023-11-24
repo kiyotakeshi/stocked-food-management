@@ -11,13 +11,21 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = { "id" })
 public class StockedFood {
-    private String id;
-    private String name;
-    private BigDecimal price;
-    private LocalDate purchasedAt;
-    private LocalDate bestBefore;
-    private boolean useUp;
-    private String memo;
+
+	private String id;
+
+	private String name;
+
+	private BigDecimal price;
+
+	private LocalDate purchasedAt;
+
+	private LocalDate bestBefore;
+
+	private boolean useUp;
+
+	private String memo;
+
 }

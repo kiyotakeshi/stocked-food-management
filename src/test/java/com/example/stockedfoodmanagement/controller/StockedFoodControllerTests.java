@@ -18,12 +18,13 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * @see StockedFoodController
  * @author kiyota
+ * @see StockedFoodController
  */
-@SpringBootTest(properties = {
-        "spring.flyway.enabled=false",
-        "spring.datasource.url=jdbc:h2:mem:testdb;"
+@SpringBootTest(properties = { //
+		"spring.flyway.enabled=false", //
+		// TODO: Testcontainers を使うように修正
+		"spring.datasource.url=jdbc:h2:mem:testdb;" //
 })
 @AutoConfigureMockMvc
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
@@ -32,23 +33,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Import(RestDocsConfig.class)
 class StockedFoodControllerTests {
 
-    final MockMvc mvc;
+	final MockMvc mvc;
 
-    @Test
-    void すべての備蓄食を取得する() throws Exception {
-        mvc.perform(get("/stocked_foods")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                // .andDo(MockMvcResultHandlers.print())
-                .andDo(document("get-all-stocked-foods",
-                        responseFields(
-                                fieldWithPath("[].id").description("ID"),
-                                fieldWithPath("[].name").description("名前"),
-                                fieldWithPath("[].price").description("価格"),
-                                fieldWithPath("[].purchasedAt").description("購入日"),
-                                fieldWithPath("[].bestBefore").description("賞味期限"),
-                                fieldWithPath("[].useUp").description("備蓄食が一回で使い切り、食べ切りのものかを表すフラグ(使い切りだと true)"),
-                                fieldWithPath("[].memo").description("備考")
-                        )));
-    }
+	@Test
+	void すべての備蓄食を取得する() throws Exception {
+		this.mvc.perform(get("/stocked_foods").contentType(MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk())
+			// .andDo(MockMvcResultHandlers.print())
+			.andDo(document("get-all-stocked-foods",
+					responseFields(fieldWithPath("[].id").description("ID"), fieldWithPath("[].name").description("名前"),
+							fieldWithPath("[].price").description("価格"),
+							fieldWithPath("[].purchasedAt").description("購入日"),
+							fieldWithPath("[].bestBefore").description("賞味期限"),
+							fieldWithPath("[].useUp").description("備蓄食が一回で使い切り、食べ切りのものかを表すフラグ(使い切りだと true)"),
+							fieldWithPath("[].memo").description("備考"))));
+	}
+
 }

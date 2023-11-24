@@ -17,7 +17,9 @@ public class TestStockedFoodManagementApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.from(StockedFoodManagementApplication::main).with(TestStockedFoodManagementApplication.class).run(args);
+		SpringApplication.from(StockedFoodManagementApplication::main)
+			.with(TestStockedFoodManagementApplication.class)
+			.run(args);
 	}
 
 }
