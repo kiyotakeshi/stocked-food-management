@@ -1,15 +1,17 @@
 package com.example.stockedfoodmanagement.controller;
 
-import com.example.stockedfoodmanagement.RestDocsConfig;
+import com.example.stockedfoodmanagement.test.ControllerIntegrationTest;
+import com.example.stockedfoodmanagement.model.StockedFood;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestConstructor;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.UUID;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
@@ -21,19 +23,30 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author kiyota
  * @see StockedFoodController
  */
-@SpringBootTest(properties = { //
-		"spring.flyway.enabled=false", //
-		// TODO: Testcontainers を使うように修正
-		"spring.datasource.url=jdbc:h2:mem:testdb;" //
-})
-@AutoConfigureMockMvc
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@AutoConfigureRestDocs
+@ControllerIntegrationTest
 @RequiredArgsConstructor
-@Import(RestDocsConfig.class)
-class StockedFoodControllerTests {
+class StockedFoodControllerIntegrationTests {
+
+	private final UUID CUP_RAMEN_UUID = UUID.randomUUID();
+
+	private final UUID RICE_UUID = UUID.randomUUID();
+
+	private final UUID CANNED_MACKEREL_UUID = UUID.randomUUID();
+
+	final TestEntityManager entityManager;
 
 	final MockMvc mvc;
+
+	@BeforeEach
+	void setUp() {
+		this.entityManager.persist(new StockedFood(this.CUP_RAMEN_UUID, "カップラーメン", BigDecimal.valueOf(150),
+				LocalDate.of(2023, 12, 23), LocalDate.of(2025, 12, 1), true, ""));
+
+		this.entityManager.persist(new StockedFood(this.RICE_UUID, "お米", BigDecimal.valueOf(5_000),
+				LocalDate.of(2023, 12, 13), LocalDate.of(2024, 7, 1), false, "10kg"));
+		this.entityManager.persist(new StockedFood(this.CANNED_MACKEREL_UUID, "鯖缶", BigDecimal.valueOf(250),
+				LocalDate.of(2023, 12, 20), LocalDate.of(2025, 9, 1), false, "ドラックストアで初めて見つけた"));
+	}
 
 	@Test
 	void すべての備蓄食を取得する() throws Exception {

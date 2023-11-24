@@ -14,5 +14,7 @@
 	<!-- @see https://github.com/spring-io/spring-javaformat/blob/main/spring-javaformat/spring-javaformat-checkstyle/src/main/resources/io/spring/javaformat/checkstyle/spring-checkstyle.xml#L85C64-L88 -->
 	<!-- [ERROR] src/main/java/com/example/stockedfoodmanagement/controller/StockedFoodController.java:[15,1] (javadoc) JavadocType: Type Javadoc tag @author must match pattern '.+\s.+'. -->
 	<suppress files="\.java" checks="JavadocTypeCheck"/>
-	<!--<suppress files="com[\\/]example[\\/]stockedfoodmanagement[\\/]test" checks="SpringTestFileName"/>-->
+	<!-- @see https://github.com/spring-io/spring-javaformat/blob/main/spring-javaformat/spring-javaformat-checkstyle/src/main/resources/io/spring/javaformat/checkstyle/spring-checkstyle.xml#L14 -->
+	<!-- [ERROR] src/test/java/com/example/stockedfoodmanagement/ControllerIntegrationTest.java:[1] (extension) SpringTestFileName: Test classes should have a name ending with Tests.java. -->
+	<suppress files="com[\\/]example[\\/]stockedfoodmanagement[\\/]test" checks="SpringTestFileName"/>
 </suppressions>

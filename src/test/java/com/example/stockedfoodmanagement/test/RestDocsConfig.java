@@ -1,4 +1,4 @@
-package com.example.stockedfoodmanagement;
+package com.example.stockedfoodmanagement.test;
 
 import org.springframework.boot.test.autoconfigure.restdocs.RestDocsMockMvcConfigurationCustomizer;
 import org.springframework.boot.test.context.TestConfiguration;

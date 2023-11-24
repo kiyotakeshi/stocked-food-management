@@ -1,20 +1,26 @@
 package com.example.stockedfoodmanagement.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 /**
  * @author kiyota
  */
+@Entity
 @Getter
 @AllArgsConstructor
 @ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = { "id" })
 public class StockedFood {
 
-	private String id;
+	@Id
+	private UUID id;
 
 	private String name;
 
@@ -27,5 +33,10 @@ public class StockedFood {
 	private boolean useUp;
 
 	private String memo;
+
+	@Override
+	public String toString() {
+		return this.id.toString();
+	}
 
 }

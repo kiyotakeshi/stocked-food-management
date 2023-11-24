@@ -25,3 +25,11 @@ open target/generated-docs/index.html
 ```shell
 ./mvnw spring-javaformat:apply validate
 ```
+
+## format sql files
+
+```shell
+npm i
+
+./node_modules/sql-formatter/bin/sql-formatter-cli.cjs --language postgresql --fix src/main/resources/db/migration/*.sql
+```
