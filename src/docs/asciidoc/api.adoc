@@ -4,17 +4,34 @@
 [[resources_stocked_foods]]
 == StockedFoods(備蓄食)
 
-[[resources_greetings_list]]
+[[resources_list_stocked_food]]
 === List stocked foods
 
 operation::get-all-stocked-foods[snippets='curl-request,response-fields,http-response']
 
+[[resources_get_stocked_food]]
 === Get stocked food
+
+==== success request
 
 operation::get-stocked-food[snippets='curl-request,http-response']
 
+==== non-existent ID is specified
+
 operation::get-stocked-food-not-found[snippets='curl-request,http-response']
 
+[[resources_create_stocked_food]]
 === Create stocked food
 
 operation::create-stocked-food[snippets='curl-request,request-body,http-response']
+
+[[resources_update_stocked_food]]
+=== Update stocked food
+
+==== success request
+
+operation::update-stocked-food[snippets='curl-request,request-body,http-response']
+
+==== non-existent ID is specified
+
+operation::update-stocked-food-not-found[snippets='curl-request,http-response']

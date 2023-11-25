@@ -22,16 +22,22 @@ public class StockedFood {
 	@Id
 	private UUID id;
 
+	@Setter(AccessLevel.PACKAGE)
 	private String name;
 
+	@Setter(AccessLevel.PACKAGE)
 	private BigDecimal price;
 
+	@Setter(AccessLevel.PACKAGE)
 	private LocalDate purchasedAt;
 
+	@Setter(AccessLevel.PACKAGE)
 	private LocalDate bestBefore;
 
+	@Setter(AccessLevel.PACKAGE)
 	private boolean useUp;
 
+	@Setter(AccessLevel.PACKAGE)
 	private String memo;
 
 	@Override

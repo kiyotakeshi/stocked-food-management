@@ -54,7 +54,7 @@ class StockedFoodControllerIntegrationTests {
 	@Test
 	void すべての備蓄食を取得する() throws Exception {
 		this.mvc.perform(get("/stocked_foods").contentType(MediaType.APPLICATION_JSON))
-			.andExpect(status().isOk())
+			.andExpect(status().isOk()) //
 			// .andDo(MockMvcResultHandlers.print())
 			.andDo(document("get-all-stocked-foods", responseFields(fieldWithPath("[].id").description("ID"), //
 					fieldWithPath("[].name").description("名前"), //
@@ -67,15 +67,16 @@ class StockedFoodControllerIntegrationTests {
 
 	@Test
 	void IDを指定した備蓄食を取得する() throws Exception {
-		this.mvc.perform(get("/stocked_foods/{id}", this.CUP_RAMEN_UUID).contentType(MediaType.APPLICATION_JSON))
-			.andExpect(status().isOk())
+		this.mvc.perform(get("/stocked_foods/{id}", this.CUP_RAMEN_UUID) //
+			.contentType(MediaType.APPLICATION_JSON)) //
+			.andExpect(status().isOk()) //
 			.andDo(document("get-stocked-food"));
 	}
 
 	@Test
 	void 存在しないIDを指定して備蓄食を取得する() throws Exception {
 		this.mvc.perform(get("/stocked_foods/{id}", UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON))
-			.andExpect(status().isNotFound())
+			.andExpect(status().isNotFound()) //
 			.andDo(document("get-stocked-food-not-found"));
 	}
 
@@ -84,12 +85,37 @@ class StockedFoodControllerIntegrationTests {
 		var command = new CreateStockedFood("パスタ", null, LocalDate.of(2023, 11, 25), LocalDate.of(2025, 3, 1), false,
 				"1.5mm, 500g");
 
-		this.mvc
-			.perform(post("/stocked_foods").contentType(MediaType.APPLICATION_JSON)
-				.content(this.mapper.writeValueAsString(command)))
-			.andExpect(status().isCreated())
-			.andExpect(header().exists("Location"))
-			.andDo(document("create-stocked-food"));
+		this.mvc.perform(post("/stocked_foods") //
+			.contentType(MediaType.APPLICATION_JSON) //
+			.content(this.mapper.writeValueAsString(command))) //
+			.andExpect(status().isCreated()) //
+			.andExpect(header().exists("Location")) //
+			.andDo(document("create-stocked-food")); //
+	}
+
+	@Test
+	void 備蓄食に関する情報を更新する() throws Exception {
+		var command = new UpdateStockedFood("カップラーメン", BigDecimal.valueOf(150), LocalDate.of(2023, 11, 25),
+				LocalDate.of(2025, 3, 1), false, "期間限定でセブンイレブンで売ってた");
+
+		this.mvc.perform(put("/stocked_foods/{id}", this.CUP_RAMEN_UUID) //
+			.contentType(MediaType.APPLICATION_JSON) //
+			.content(this.mapper.writeValueAsString(command))) //
+			.andExpect(status().isOk()) //
+			.andExpect(jsonPath("$.memo").value("期間限定でセブンイレブンで売ってた")) //
+			.andDo(document("update-stocked-food"));
+	}
+
+	@Test
+	void 存在しないIDを指定して備蓄食を更新する() throws Exception {
+		var command = new UpdateStockedFood("カップラーメン", BigDecimal.valueOf(150), LocalDate.of(2023, 11, 25),
+				LocalDate.of(2025, 3, 1), false, "期間限定でセブンイレブンで売ってた");
+
+		this.mvc.perform(put("/stocked_foods/{id}", UUID.randomUUID()) //
+			.contentType(MediaType.APPLICATION_JSON) //
+			.content(this.mapper.writeValueAsString(command))) //
+			.andExpect(status().isNotFound()) //
+			.andDo(document("update-stocked-food-not-found"));
 	}
 
 }

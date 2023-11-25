@@ -1,5 +1,6 @@
 package com.example.stockedfoodmanagement.stockedFood.web;
 
+import com.example.stockedfoodmanagement.stockedFood.ResourceNotFoundException;
 import com.example.stockedfoodmanagement.stockedFood.StockedFoodFactory;
 import com.example.stockedfoodmanagement.stockedFood.StockedFoods;
 import com.example.stockedfoodmanagement.stockedFood.StockedFood;
@@ -31,7 +32,7 @@ public class StockedFoodController {
 	public ResponseEntity<StockedFood> getStockedFood(@PathVariable UUID id) {
 		return this.stockedFoods.findById(id) //
 			.map(ResponseEntity::ok) //
-			.orElse(ResponseEntity.notFound().build());
+			.orElseThrow(ResourceNotFoundException::new);
 	}
 
 	@PostMapping
@@ -40,6 +41,13 @@ public class StockedFoodController {
 		return ResponseEntity //
 			.created(URI.create("/stocked_foods/" + stockedFood.getId())) //
 			.body(stockedFood);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<StockedFood> updateStockedFood(@PathVariable UUID id,
+			@RequestBody @Valid UpdateStockedFood command) {
+		var stockedFood = this.stockedFoods.findById(id).orElseThrow(ResourceNotFoundException::new);
+		return ResponseEntity.ok(this.stockedFoods.save(StockedFoodFactory.update(stockedFood, command)));
 	}
 
 }
