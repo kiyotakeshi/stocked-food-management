@@ -8,3 +8,7 @@
 === List stocked foods
 
 operation::get-all-stocked-foods[snippets='curl-request,response-fields,http-response']
+
+=== Create stocked food
+
+operation::create-stocked-food[snippets='curl-request,request-body,http-response']

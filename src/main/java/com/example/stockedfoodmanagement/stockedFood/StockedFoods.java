@@ -1,6 +1,5 @@
-package com.example.stockedfoodmanagement;
+package com.example.stockedfoodmanagement.stockedFood;
 
-import com.example.stockedfoodmanagement.model.StockedFood;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -23,7 +23,7 @@ import java.lang.annotation.*;
 		"spring.jpa.properties.hibernate.format_sql=true", //
 		"spring.jpa.properties.hibernate.show_sql=true" })
 @AutoConfigureMockMvc
-@AutoConfigureRestDocs
+@AutoConfigureRestDocs(uriPort = 8888)
 @AutoConfigureTestDatabase
 @AutoConfigureTestEntityManager
 @Transactional

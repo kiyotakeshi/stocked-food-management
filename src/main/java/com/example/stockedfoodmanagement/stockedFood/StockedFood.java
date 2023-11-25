@@ -1,4 +1,4 @@
-package com.example.stockedfoodmanagement.model;
+package com.example.stockedfoodmanagement.stockedFood;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,7 +13,7 @@ import java.util.UUID;
  */
 @Entity
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = { "id" })

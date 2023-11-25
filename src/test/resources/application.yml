@@ -1,0 +1,2 @@
+## パラメータの値をログに表示 ex.) binding parameter [1] as [DATE] - [2025-12-01]
+logging.level.org.hibernate.orm.jdbc.bind: TRACE
