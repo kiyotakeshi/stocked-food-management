@@ -1,4 +1,4 @@
-package com.example.stockedfoodmanagement.stockedFood;
+package com.example.stockedfoodmanagement.stockedFood.web;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

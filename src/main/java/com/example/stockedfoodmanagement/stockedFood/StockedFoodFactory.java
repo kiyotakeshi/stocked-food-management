@@ -1,5 +1,6 @@
 package com.example.stockedfoodmanagement.stockedFood;
 
+import com.example.stockedfoodmanagement.stockedFood.web.CreateStockedFood;
 import lombok.experimental.UtilityClass;
 
 import java.math.BigDecimal;

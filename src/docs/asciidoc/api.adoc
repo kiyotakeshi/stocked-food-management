@@ -9,6 +9,12 @@
 
 operation::get-all-stocked-foods[snippets='curl-request,response-fields,http-response']
 
+=== Get stocked food
+
+operation::get-stocked-food[snippets='curl-request,http-response']
+
+operation::get-stocked-food-not-found[snippets='curl-request,http-response']
+
 === Create stocked food
 
 operation::create-stocked-food[snippets='curl-request,request-body,http-response']

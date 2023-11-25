@@ -1,6 +1,5 @@
 package com.example.stockedfoodmanagement.stockedFood.web;
 
-import com.example.stockedfoodmanagement.stockedFood.CreateStockedFood;
 import com.example.stockedfoodmanagement.stockedFood.StockFoodTestUtils;
 import com.example.stockedfoodmanagement.test.ControllerIntegrationTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RequiredArgsConstructor
 class StockedFoodControllerIntegrationTests {
 
-	private final UUID CUP_RAMEN_UUID = UUID.randomUUID();
+	private final UUID CUP_RAMEN_UUID = UUID.fromString("a313a456-7890-1234-5678-901234567890");
 
 	private final UUID RICE_UUID = UUID.randomUUID();
 
@@ -64,6 +63,20 @@ class StockedFoodControllerIntegrationTests {
 					fieldWithPath("[].bestBefore").description("賞味期限"), //
 					fieldWithPath("[].useUp").description("備蓄食が一回で使い切り、食べ切りのものかを表すフラグ(使い切りだと true)"), //
 					fieldWithPath("[].memo").description("備考"))));
+	}
+
+	@Test
+	void IDを指定した備蓄食を取得する() throws Exception {
+		this.mvc.perform(get("/stocked_foods/{id}", this.CUP_RAMEN_UUID).contentType(MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk())
+			.andDo(document("get-stocked-food"));
+	}
+
+	@Test
+	void 存在しないIDを指定して備蓄食を取得する() throws Exception {
+		this.mvc.perform(get("/stocked_foods/{id}", UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON))
+			.andExpect(status().isNotFound())
+			.andDo(document("get-stocked-food-not-found"));
 	}
 
 	@Test
