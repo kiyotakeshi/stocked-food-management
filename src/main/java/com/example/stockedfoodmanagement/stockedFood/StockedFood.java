@@ -1,5 +1,7 @@
 package com.example.stockedfoodmanagement.stockedFood;
 
+import com.example.stockedfoodmanagement.stockedFood.web.CreateStockedFood;
+import com.example.stockedfoodmanagement.stockedFood.web.UpdateStockedFood;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -13,36 +15,44 @@ import java.util.UUID;
  */
 @Entity
 @Getter
+@Setter(AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = { "id" })
+@ToString
 public class StockedFood {
 
 	@Id
+	@Setter(AccessLevel.NONE)
 	private UUID id;
 
-	@Setter(AccessLevel.PACKAGE)
 	private String name;
 
-	@Setter(AccessLevel.PACKAGE)
 	private BigDecimal price;
 
-	@Setter(AccessLevel.PACKAGE)
 	private LocalDate purchasedAt;
 
-	@Setter(AccessLevel.PACKAGE)
 	private LocalDate bestBefore;
 
-	@Setter(AccessLevel.PACKAGE)
 	private boolean useUp;
 
-	@Setter(AccessLevel.PACKAGE)
 	private String memo;
 
-	@Override
-	public String toString() {
-		return this.id.toString();
+	public static StockedFood create(CreateStockedFood command) {
+		return new StockedFood(UUID.randomUUID(), command.name(),
+				(command.price() == null) ? BigDecimal.ZERO : command.price(), command.purchasedAt(),
+				command.bestBefore(), command.useUp(), command.memo());
+	}
+
+	public static StockedFood update(StockedFood stockedFood, UpdateStockedFood command) {
+		stockedFood.setName(command.name());
+		stockedFood.setPrice(command.price());
+		stockedFood.setPurchasedAt(command.purchasedAt());
+		stockedFood.setBestBefore(command.bestBefore());
+		stockedFood.setUseUp(command.useUp());
+		stockedFood.setMemo(command.memo());
+		// System.out.println(stockedFood);
+		return stockedFood;
 	}
 
 }

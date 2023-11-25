@@ -12,13 +12,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author kiyota
  */
-class StockedFoodFactoryTests {
+class StockedFoodTests {
 
 	@Test
 	void testCreateStockedFoodWithNullPrice() {
 		var command = new CreateStockedFood("パスタ", null, LocalDate.of(2023, 11, 25), LocalDate.of(2025, 3, 1), false,
 				"1.5mm, 500g");
-		StockedFood actual = StockedFoodFactory.create(command);
+		StockedFood actual = StockedFood.create(command);
 
 		assertThat(actual.getId()).isNotNull();
 		assertThat(actual.getId()).isInstanceOf(UUID.class);
