@@ -1,17 +1,19 @@
 package com.example.stockedfoodmanagement.stockedFood.web;
 
 import com.example.stockedfoodmanagement.stockedFood.StockFoodTestUtils;
+import com.example.stockedfoodmanagement.stockedFood.StockedFoods;
 import com.example.stockedfoodmanagement.test.ControllerIntegrationTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -34,7 +36,7 @@ class StockedFoodControllerIntegrationTests {
 
 	private final UUID CANNED_MACKEREL_UUID = UUID.randomUUID();
 
-	final TestEntityManager entityManager;
+	final StockedFoods stockedFoods;
 
 	final MockMvc mvc;
 
@@ -42,13 +44,18 @@ class StockedFoodControllerIntegrationTests {
 
 	@BeforeEach
 	void setUp() {
-		this.entityManager.persist(StockFoodTestUtils.create(this.CUP_RAMEN_UUID, "カップラーメン", BigDecimal.valueOf(150),
-				LocalDate.of(2023, 12, 23), LocalDate.of(2025, 12, 1), true, ""));
+		this.stockedFoods.saveAll(List.of(
+				StockFoodTestUtils.create(this.CUP_RAMEN_UUID, "カップラーメン", BigDecimal.valueOf(150),
+						LocalDate.of(2023, 12, 23), LocalDate.of(2025, 12, 1), true, ""),
+				StockFoodTestUtils.create(this.RICE_UUID, "お米", BigDecimal.valueOf(5_000), LocalDate.of(2023, 12, 13),
+						LocalDate.of(2024, 7, 1), false, "10kg"),
+				StockFoodTestUtils.create(this.CANNED_MACKEREL_UUID, "鯖缶", BigDecimal.valueOf(250),
+						LocalDate.of(2023, 12, 20), LocalDate.of(2025, 9, 1), false, "ドラックストアで初めて見つけた")));
+	}
 
-		this.entityManager.persist(StockFoodTestUtils.create(this.RICE_UUID, "お米", BigDecimal.valueOf(5_000),
-				LocalDate.of(2023, 12, 13), LocalDate.of(2024, 7, 1), false, "10kg"));
-		this.entityManager.persist(StockFoodTestUtils.create(this.CANNED_MACKEREL_UUID, "鯖缶", BigDecimal.valueOf(250),
-				LocalDate.of(2023, 12, 20), LocalDate.of(2025, 9, 1), false, "ドラックストアで初めて見つけた"));
+	@AfterEach
+	void after() {
+		this.stockedFoods.deleteAll();
 	}
 
 	@Test

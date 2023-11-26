@@ -2,7 +2,6 @@ package com.example.stockedfoodmanagement.test;
 
 import jakarta.transaction.Transactional;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +24,6 @@ import java.lang.annotation.*;
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs(uriPort = 8888)
 @AutoConfigureTestDatabase
-@AutoConfigureTestEntityManager
 @Transactional
 @Import(RestDocsConfig.class)
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)

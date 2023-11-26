@@ -35,3 +35,14 @@ operation::update-stocked-food[snippets='curl-request,request-body,http-response
 ==== non-existent ID is specified
 
 operation::update-stocked-food-not-found[snippets='curl-request,http-response']
+
+[[resources_list_near_expiration_stocked_food]]
+=== List near expiration stocked foods
+
+==== without query param
+
+operation::near-expiration-foods[snippets='curl-request,http-response']
+
+==== with query param
+
+operation::near-expiration-foods-with-query-param[snippets='curl-request,query-parameters,http-response']

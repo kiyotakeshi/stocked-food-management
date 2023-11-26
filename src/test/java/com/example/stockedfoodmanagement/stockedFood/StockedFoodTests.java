@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class StockedFoodTests {
 
 	@Test
-	void testCreateStockedFoodWithNullPrice() {
+	void priceがnullの場合0で初期化する() {
 		var command = new CreateStockedFood("パスタ", null, LocalDate.of(2023, 11, 25), LocalDate.of(2025, 3, 1), false,
 				"1.5mm, 500g");
 		StockedFood actual = StockedFood.create(command);

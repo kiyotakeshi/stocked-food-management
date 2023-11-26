@@ -11,7 +11,7 @@ import java.time.LocalDate;
  */
 public record UpdateStockedFood( //
 		@NotEmpty String name, //
-		BigDecimal price, //
+		@NotNull BigDecimal price, //
 		@NotNull LocalDate purchasedAt, //
 		@NotNull LocalDate bestBefore, //
 		@NotNull boolean useUp, //

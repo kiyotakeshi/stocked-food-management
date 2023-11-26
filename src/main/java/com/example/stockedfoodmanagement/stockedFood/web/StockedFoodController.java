@@ -36,10 +36,10 @@ public class StockedFoodController {
 
 	@PostMapping
 	public ResponseEntity<StockedFood> createStockedFood(@RequestBody @Valid CreateStockedFood command) {
-		StockedFood stockedFood = this.stockedFoods.save(StockedFood.create(command));
+		var createdStockedFood = this.stockedFoods.save(StockedFood.create(command));
 		return ResponseEntity //
-			.created(URI.create("/stocked_foods/" + stockedFood.getId())) //
-			.body(stockedFood);
+			.created(URI.create("/stocked_foods/" + createdStockedFood.getId())) //
+			.body(createdStockedFood);
 	}
 
 	@PutMapping("/{id}")
@@ -49,5 +49,9 @@ public class StockedFoodController {
 		var updateStockedFood = StockedFood.update(stockedFood, command);
 		return ResponseEntity.ok(this.stockedFoods.save(updateStockedFood));
 	}
+
+	// TODO: 備蓄食の消費
+
+	// TODO: 履歴(別の controller かな)
 
 }
