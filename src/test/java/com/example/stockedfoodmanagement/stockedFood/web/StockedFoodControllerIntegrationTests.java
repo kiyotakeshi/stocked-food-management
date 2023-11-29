@@ -46,11 +46,11 @@ class StockedFoodControllerIntegrationTests {
 	void setUp() {
 		this.stockedFoods.saveAll(List.of(
 				StockFoodTestUtils.create(this.CUP_RAMEN_UUID, "カップラーメン", BigDecimal.valueOf(150),
-						LocalDate.of(2023, 12, 23), LocalDate.of(2025, 12, 1), true, ""),
+						LocalDate.of(2023, 12, 23), LocalDate.of(2025, 12, 1), false, true, ""),
 				StockFoodTestUtils.create(this.RICE_UUID, "お米", BigDecimal.valueOf(5_000), LocalDate.of(2023, 12, 13),
-						LocalDate.of(2024, 7, 1), false, "10kg"),
+						LocalDate.of(2024, 7, 1), false, false, "10kg"),
 				StockFoodTestUtils.create(this.CANNED_MACKEREL_UUID, "鯖缶", BigDecimal.valueOf(250),
-						LocalDate.of(2023, 12, 20), LocalDate.of(2025, 9, 1), false, "ドラックストアで初めて見つけた")));
+						LocalDate.of(2023, 12, 20), LocalDate.of(2025, 9, 1), false, true, "ドラックストアで初めて見つけた")));
 	}
 
 	@AfterEach
@@ -68,6 +68,7 @@ class StockedFoodControllerIntegrationTests {
 					fieldWithPath("[].price").description("価格"), //
 					fieldWithPath("[].purchasedAt").description("購入日"), //
 					fieldWithPath("[].bestBefore").description("賞味期限"), //
+					fieldWithPath("[].consumptionFlag").description("使い切ったかを示すフラグ(使い切っていたら true)"), //
 					fieldWithPath("[].useUp").description("備蓄食が一回で使い切り、食べ切りのものかを表すフラグ(使い切りだと true)"), //
 					fieldWithPath("[].memo").description("備考"))));
 	}

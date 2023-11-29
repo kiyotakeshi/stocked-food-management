@@ -34,6 +34,10 @@ public class StockedFood {
 
 	private LocalDate bestBefore;
 
+	// 使い切ったか
+	private boolean consumptionFlag;
+
+	// 一回使い切りか
 	private boolean useUp;
 
 	private String memo;
@@ -41,7 +45,7 @@ public class StockedFood {
 	public static StockedFood create(CreateStockedFood command) {
 		return new StockedFood(UUID.randomUUID(), command.name(),
 				(command.price() == null) ? BigDecimal.ZERO : command.price(), command.purchasedAt(),
-				command.bestBefore(), command.useUp(), command.memo());
+				command.bestBefore(), false, command.useUp(), command.memo());
 	}
 
 	public static StockedFood update(StockedFood stockedFood, UpdateStockedFood command) {
@@ -52,6 +56,11 @@ public class StockedFood {
 		stockedFood.setUseUp(command.useUp());
 		stockedFood.setMemo(command.memo());
 		// System.out.println(stockedFood);
+		return stockedFood;
+	}
+
+	public static StockedFood finish(StockedFood stockedFood) {
+		stockedFood.consumptionFlag = true;
 		return stockedFood;
 	}
 

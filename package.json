@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "sql-formatter": "^14.0.0"
+  },
+  "scripts": {
+    "format-sql": "node_modules/sql-formatter/bin/sql-formatter-cli.cjs --language postgresql --fix src/main/resources/db/migration/*.sql"
   }
 }

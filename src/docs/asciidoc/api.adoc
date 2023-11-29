@@ -46,3 +46,17 @@ operation::near-expiration-foods[snippets='curl-request,http-response']
 ==== with query param
 
 operation::near-expiration-foods-with-query-param[snippets='curl-request,query-parameters,http-response']
+
+[[resources_consumption_records]]
+== ConsumptionRecords(消費履歴)
+
+=== Create consumption record
+
+==== create consumption record
+
+operation::create-consumption-record[snippets='curl-request,request-body,http-response']
+
+==== not create consumption record
+
+operation::not-create-consumption-record[snippets='curl-request,request-body,http-response']
+

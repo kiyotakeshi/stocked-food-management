@@ -14,8 +14,8 @@ public class StockFoodTestUtils {
 
 	// DB にテストデータを用意する際に ID が必要なため all args constructor を呼び出す
 	public static StockedFood create(UUID id, String name, BigDecimal price, LocalDate purchasedAt,
-			LocalDate bestBefore, boolean useUp, String memo) {
-		return new StockedFood(id, name, price, purchasedAt, bestBefore, useUp, memo);
+			LocalDate bestBefore, boolean consumptionFlag, boolean useUp, String memo) {
+		return new StockedFood(id, name, price, purchasedAt, bestBefore, consumptionFlag, useUp, memo);
 	}
 
 }

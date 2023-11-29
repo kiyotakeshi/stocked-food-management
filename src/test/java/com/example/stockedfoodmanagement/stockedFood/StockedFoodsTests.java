@@ -26,11 +26,11 @@ class StockedFoodsTests {
 	void setUp() {
 		this.stockedFoods.saveAll(List.of(
 				StockFoodTestUtils.create(UUID.randomUUID(), "カップラーメン", BigDecimal.valueOf(150),
-						LocalDate.of(2023, 11, 25), LocalDate.of(2025, 12, 1), true, ""),
+						LocalDate.of(2023, 11, 25), LocalDate.of(2025, 12, 1), false, true, ""),
 				StockFoodTestUtils.create(UUID.randomUUID(), "お米", BigDecimal.valueOf(5_000),
-						LocalDate.of(2023, 11, 25), LocalDate.of(2024, 7, 1), false, "10kg"),
+						LocalDate.of(2023, 11, 25), LocalDate.of(2024, 7, 1), false, false, "10kg"),
 				StockFoodTestUtils.create(UUID.randomUUID(), "鯖缶", BigDecimal.valueOf(250), LocalDate.of(2023, 11, 25),
-						LocalDate.of(2025, 9, 1), false, "ドラックストアで初めて見つけた")));
+						LocalDate.of(2025, 9, 1), false, true, "ドラックストアで初めて見つけた")));
 	}
 
 	@AfterEach

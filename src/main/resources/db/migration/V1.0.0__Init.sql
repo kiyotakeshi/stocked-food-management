@@ -5,9 +5,20 @@ CREATE TABLE
     price DECIMAL(10, 2) NOT NULL,
     purchased_at DATE NOT NULL,
     best_before DATE NOT NULL,
+    consumption_flag BOOLEAN NOT NULL,
     use_up BOOLEAN NOT NULL,
     memo VARCHAR(255)
   );
+
+CREATE TABLE
+  consumption_record (
+    id uuid NOT NULL PRIMARY KEY,
+    stocked_food_id UUID NOT NULL,
+    consumed_at TIMESTAMP NOT NULL
+  );
+
+ALTER TABLE consumption_record
+ADD FOREIGN KEY (stocked_food_id) REFERENCES stocked_food (id);
 
 -- INSERT INTO
 --   stocked_food (

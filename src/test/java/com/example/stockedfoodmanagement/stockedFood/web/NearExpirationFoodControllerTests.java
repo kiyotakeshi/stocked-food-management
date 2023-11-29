@@ -37,11 +37,11 @@ class NearExpirationFoodControllerTests {
 	void setUp() {
 		this.stockedFoods.saveAll(List.of(
 				StockFoodTestUtils.create(UUID.randomUUID(), "カップラーメン", BigDecimal.valueOf(150), LocalDate.now(),
-						LocalDate.now().plusMonths(1).minusDays(1), true, ""),
+						LocalDate.now().plusMonths(1).minusDays(1), true, true, ""),
 				StockFoodTestUtils.create(UUID.randomUUID(), "お米", BigDecimal.valueOf(5_000), LocalDate.now(),
-						LocalDate.now().plusMonths(1), false, "10kg"),
+						LocalDate.now().plusMonths(1), false, false, "10kg"),
 				StockFoodTestUtils.create(UUID.randomUUID(), "鯖缶", BigDecimal.valueOf(250), LocalDate.now(),
-						LocalDate.now().plusMonths(2), false, "ドラックストアで初めて見つけた")));
+						LocalDate.now().plusMonths(2), false, true, "ドラックストアで初めて見つけた")));
 	}
 
 	@AfterEach
