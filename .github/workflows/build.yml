@@ -25,13 +25,13 @@ jobs:
         run: mvn -B clean package --file pom.xml
 
 # publish GitHub Pages(require public repository)
-#      - name: Setup Pages
-#        uses: actions/configure-pages@v3
-#      - name: Upload artifact
-#        uses: actions/upload-pages-artifact@v2
-#        with:
-#          path: './target/generated-docs/'
-#      # you can access at https://kiyotakeshi.github.io/stocked-food-management/
-#      - name: Deploy to GitHub Pages
-#        id: deployment
-#        uses: actions/deploy-pages@v2
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: './target/generated-docs/'
+      # you can access at https://kiyotakeshi.github.io/stocked-food-management/
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
